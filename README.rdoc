@@ -1,0 +1,93 @@
+= Breadcrumbs
+
+Breadcrumbs is a simple plugin that adds a +breadcrumbs+ object to
+controllers and views.
+
+== Instalation
+
+Just run <tt>sudo gem install breadcrumbs</tt>
+
+== Usage
+
+On your controller (optional):
+
+  class ApplicationController < ActionController::Base
+    before_filter :add_initial_breadcrumbs
+
+    private
+    def add_initial_breadcrumbs
+      breadcrumbs.add 'Home', root_path
+    end
+  end
+
+  class ThingsController < ApplicationController
+    def index
+      breadcrumbs.add 'Things', things_path
+    end
+  end
+
+You don't need to provide an URL; in that case, a span will be generated
+instead of a link:
+
+  breadcrumbs.add 'Some page'
+
+You can set additional HTML attributes if you need to:
+
+  breadcrumbs.add 'Home', root_path, :id => 'home', :title => 'Go to the home page'
+
+On your view (possibly application.html.erb):
+
+  <%= breadcrumbs.render %>
+
+You can render as inline links.
+
+  <%= breadcrumbs.render(:format => :inline) %>
+
+You can set your own separator:
+
+  <p>
+    You are here: <%= breadcrumbs.render(:format => :inline, :separator => '|') %>
+  </p>
+
+=== I18n
+
+Breadcrumbs is integrated with I18n. You can set translations like:
+
+  en:
+    breadcrumbs:
+      home: "Home"
+
+And then you just call
+
+  breadcrumbs.add :home
+
+In fact, you can provide any scope you want.
+
+  breadcrumbs.add "titles.home"
+
+== Maintainer
+
+* Nando Vieira - http://simplesideias.com.br
+
+License
+
+(The MIT License)
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
