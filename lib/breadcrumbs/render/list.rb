@@ -24,7 +24,7 @@ class Breadcrumbs
         css << "item-#{i}"
 
         text, url, options = *item
-
+        text = CGI.escapeHTML(text)
         text = tag(:a, text, options.merge(:href => url)) if url
 
         tag(:li, text, :class => css.join(" "))

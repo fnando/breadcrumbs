@@ -145,8 +145,34 @@ class BreadcrumbsTest < Test::Unit::TestCase
     assert_equal "Nosso time", items[1].inner_text
   end
 
+  def test_render_scope_as_text_for_missing_scope
+    @breadcrumbs.add :contact
+    @breadcrumbs.add "Help"
+
+    html = Nokogiri::HTML(@breadcrumbs.render)
+
+    items = html.search("li")
+
+    assert_equal "contact", items[0].inner_text
+    assert_equal "Help", items[1].inner_text
+  end
+
   def test_pimp_action_controller
     methods = ActionController::Base.instance_methods
     assert (methods.include?(:breadcrumbs) || methods.include?("breadcrumbs"))
+  end
+
+  def test_escape_text_when_rendering_inline
+    @breadcrumbs.add "<script>alert(1)</script>"
+    html = @breadcrumbs.render(:format => :inline)
+
+    assert_equal %[<span class="first last item-0">&lt;script&gt;alert(1)&lt;/script&gt;</span>], html
+  end
+
+  def test_escape_text_when_rendering_list
+    @breadcrumbs.add "<script>alert(1)</script>"
+    html = @breadcrumbs.render
+
+    assert_match /&lt;script&gt;alert\(1\)&lt;\/script&gt;/, html
   end
 end

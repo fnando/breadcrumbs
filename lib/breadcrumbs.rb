@@ -44,7 +44,7 @@ class Breadcrumbs
 
   def translate(scope) # :nodoc:
     text = I18n.t(scope, :scope => :breadcrumbs, :raise => true) rescue nil
-    text ||= I18n.t(scope, :default => scope)
+    text ||= I18n.t(scope, :default => scope.to_s)
     text
   end
 end
