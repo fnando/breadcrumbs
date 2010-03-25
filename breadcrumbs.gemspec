@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{breadcrumbs}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nando Vieira"]
-  s.date = %q{2010-03-24}
+  s.date = %q{2010-03-25}
   s.description = %q{Breadcrumbs is a simple plugin that adds a `breadcrumbs` object to controllers and views.}
   s.email = %q{fnando.vieira@gmail.com}
   s.extra_rdoc_files = [
@@ -28,7 +28,7 @@ Gem::Specification.new do |s|
      "test/resources/pt.yml",
      "test/test_helper.rb"
   ]
-  s.homepage = %q{http://github.com/fnando/games_radar}
+  s.homepage = %q{http://github.com/fnando/breadcrumbs}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.6}
