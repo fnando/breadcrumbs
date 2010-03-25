@@ -1,7 +1,6 @@
 = Breadcrumbs
 
-Breadcrumbs is a simple plugin that adds a +breadcrumbs+ object to
-controllers and views.
+Breadcrumbs is a simple plugin that adds a +breadcrumbs+ object to controllers and views.
 
 == Instalation
 

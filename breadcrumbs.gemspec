@@ -33,6 +33,10 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.6}
   s.summary = %q{Breadcrumbs is a simple plugin that adds a `breadcrumbs` object to controllers and views.}
+  s.test_files = [
+    "test/breadcrumbs_test.rb",
+     "test/test_helper.rb"
+  ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
