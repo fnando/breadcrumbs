@@ -22,7 +22,7 @@ end
 JEWEL = Jeweler::Tasks.new do |gem|
   gem.name = "breadcrumbs"
   gem.email = "fnando.vieira@gmail.com"
-  gem.homepage = "http://github.com/fnando/games_radar"
+  gem.homepage = "http://github.com/fnando/breadcrumbs"
   gem.authors = ["Nando Vieira"]
   gem.version = Breadcrumbs::Version::STRING
   gem.summary = "Breadcrumbs is a simple plugin that adds a `breadcrumbs` object to controllers and views."
