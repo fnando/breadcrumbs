@@ -133,6 +133,18 @@ class BreadcrumbsTest < Test::Unit::TestCase
     assert_equal "|", html.at("span.separator").inner_text
   end
 
+  def test_render_original_text_when_disabling_translation
+    @breadcrumbs.add :home, nil, :i18n => false
+    @breadcrumbs.add :people
+
+    html = Nokogiri::HTML(@breadcrumbs.render)
+
+    items = html.search("li")
+
+    assert_equal "home", items[0].inner_text
+    assert_equal "Nosso time", items[1].inner_text
+  end
+
   def test_render_internationalized_text_using_default_scope
     @breadcrumbs.add :home
     @breadcrumbs.add :people

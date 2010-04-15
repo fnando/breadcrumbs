@@ -1,5 +1,6 @@
 require "rubygems"
 require "test/unit"
+require "cgi"
 require "nokogiri"
 require "action_controller"
 

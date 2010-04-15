@@ -19,7 +19,9 @@ class Breadcrumbs
   # find it as I18n scope.
   #
   def add(text, url = nil, options = {})
-    items << [translate(text), url, options]
+    options.reverse_merge!(:i18n => true)
+    text = translate(text) if options.delete(:i18n)
+    items << [text.to_s, url, options]
   end
 
   # Render breadcrumbs using the specified format.

@@ -64,6 +64,10 @@ In fact, you can provide any scope you want.
 
   breadcrumbs.add "titles.home"
 
+If you don't want to translate a label, just pass the option <tt>:i18n</tt> as <tt>false</tt>.
+
+  breadcrumbs.add :home, nil, :i18n => false
+
 == Maintainer
 
 * Nando Vieira - http://simplesideias.com.br
