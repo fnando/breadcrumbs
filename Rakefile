@@ -27,7 +27,6 @@ JEWEL = Jeweler::Tasks.new do |gem|
   gem.version = Breadcrumbs::Version::STRING
   gem.summary = "Breadcrumbs is a simple plugin that adds a `breadcrumbs` object to controllers and views."
   gem.description = "Breadcrumbs is a simple plugin that adds a `breadcrumbs` object to controllers and views."
-  gem.add_dependency "rails"
   gem.files =  FileList["README.rdoc", "{lib,test}/**/*"]
 end
 
