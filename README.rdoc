@@ -38,6 +38,10 @@ On your view (possibly application.html.erb):
 
   <%= breadcrumbs.render %>
 
+You can render as ordered list.
+
+  <%= breadcrumbs.render(:format => :ordered_list) %>
+
 You can render as inline links.
 
   <%= breadcrumbs.render(:format => :inline) %>

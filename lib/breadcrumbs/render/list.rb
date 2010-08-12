@@ -2,9 +2,14 @@ class Breadcrumbs
   module Render
     class List < Base # :nodoc: all
       def render
-        options = {:class => "breadcrumbs"}.merge(default_options)
+        options = {
+          :class => "breadcrumbs",
+          :format => :list
+        }.merge(default_options)
 
-        tag(:ul, options) do
+        list_style = options[:format] == :list ? :ul : :ol
+
+        tag(list_style, options) do
           html = ""
           items = breadcrumbs.items
           size = items.size

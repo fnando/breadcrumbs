@@ -45,6 +45,13 @@ class BreadcrumbsTest < Test::Unit::TestCase
     assert_not_nil html.at("ul.breadcrumbs")
   end
 
+  def test_render_as_ordered_list
+    @breadcrumbs.add "Home", "/"
+    html = Nokogiri::HTML(@breadcrumbs.render(:format => :ordered_list))
+
+    assert_not_nil html.at("ol.breadcrumbs")
+  end
+
   def test_render_as_list_with_custom_attributes
     @breadcrumbs.add "Home", "/", :class => "home"
     html = Nokogiri::HTML(@breadcrumbs.render(:id => "breadcrumbs", :class => "top"))

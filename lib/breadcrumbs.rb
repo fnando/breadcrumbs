@@ -31,6 +31,7 @@ class Breadcrumbs
   #   breadcrumbs.render(:format => :inline)
   #   breadcrumbs.render(:format => :inline, :separator => "|")
   #   breadcrumbs.render(:format => :list)
+  #   breadcrumbs.render(:format => :ordered_list)
   #   breadcrumbs.render(:id => "breadcrumbs")
   #   breadcrumbs.render(:class => "breadcrumbs")
   #
