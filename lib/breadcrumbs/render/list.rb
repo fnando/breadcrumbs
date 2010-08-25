@@ -29,11 +29,10 @@ class Breadcrumbs
         css << "item-#{i}"
 
         text, url, options = *item
-        text = CGI.escapeHTML(text)
-        text = tag(:a, text, options.merge(:href => url)) if url
-
+        text = wrap_item(url, CGI.escapeHTML(text), options)
         tag(:li, text, :class => css.join(" "))
       end
+
     end
   end
 end

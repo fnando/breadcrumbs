@@ -26,6 +26,17 @@ class Breadcrumbs
 
         %[<#{name}#{attrs}>#{content}</#{name}>]
       end
+
+      protected
+
+        def wrap_item(url, text, options)
+          if url
+            tag(:a, text, options.merge(:href => url))
+          else
+            tag(:span, text, options)
+          end
+        end
+
     end
   end
 end
