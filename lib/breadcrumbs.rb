@@ -23,7 +23,7 @@ class Breadcrumbs
   def add(text, url = nil, options = {})
     options.reverse_merge!(:i18n => true)
     text = translate(text) if options.delete(:i18n)
-    url  = controller.url_for(url) if url
+    url  = controller.__send__(:url_for, url) if url
     items << [text.to_s, url, options]
   end
 
