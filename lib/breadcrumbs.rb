@@ -1,6 +1,7 @@
 require "i18n" unless defined?(I18n)
 require "breadcrumbs/render"
 require "breadcrumbs/action_controller_ext" if defined?(ActionController)
+require "active_support/inflector"
 
 class Breadcrumbs
   attr_accessor :items
@@ -35,12 +36,25 @@ class Breadcrumbs
   #   breadcrumbs.render(:id => "breadcrumbs")
   #   breadcrumbs.render(:class => "breadcrumbs")
   #
+  # You can define your own formatter. Just create a class that implements a +render+ instance
+  # method and you're good to go.
+  #
+  #   class Breadcrumbs::Render::Dl
+  #     def render
+  #       # return breadcrumbs wrapped in a <DL> tag
+  #     end
+  #   end
+  #
+  # To use your new format, just provide the <tt>:format</tt> option.
+  #
+  #   breadcrumbs.render(:format => :dl)
+  #
   def render(options = {})
-    if options[:format] == :inline
-      Breadcrumbs::Render::Inline.new(self, options).render
-    else
-      Breadcrumbs::Render::List.new(self, options).render
-    end
+    options[:format] ||= :list
+
+    klass_name = options[:format].to_s.classify
+    klass = Breadcrumbs::Render.const_get(klass_name)
+    klass.new(self, options).render
   end
 
   alias :<< :add
