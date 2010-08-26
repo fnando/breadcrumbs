@@ -30,7 +30,7 @@ class Breadcrumbs
         css << "item-#{i}"
 
         text, url, options = *item
-        text = wrap_item(url, CGI.escapeHTML(text), options)
+        text = wrap_item(url, escape(text), options)
         tag(:li, text, :class => css.join(" "))
       end
     end

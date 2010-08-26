@@ -35,6 +35,10 @@ class Breadcrumbs
           tag(:span, text, options)
         end
       end
+
+      def escape(text)
+        text.respond_to?(:html_safe?) && text.html_safe? ? text : CGI.escapeHTML(text)
+      end
     end
   end
 end

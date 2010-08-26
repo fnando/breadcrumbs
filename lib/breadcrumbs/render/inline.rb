@@ -29,7 +29,7 @@ class Breadcrumbs
         options[:class] << " #{css.join(" ")}"
         options[:class].gsub!(/^ *(.*?)$/, '\\1')
 
-        wrap_item(url, CGI.escapeHTML(text), options)
+        wrap_item(url, escape(text), options)
       end
     end
   end

@@ -206,6 +206,13 @@ class BreadcrumbsTest < Test::Unit::TestCase
     assert_match /&lt;script&gt;alert\(1\)&lt;\/script&gt;/, html
   end
 
+  def test_allow_custom_text_escaping
+    @breadcrumbs.add "<em>Home</em>".html_safe
+    html = @breadcrumbs.render(:format => :inline)
+
+    assert_equal %[<span class="first last item-0"><em>Home</em></span>], html
+  end
+
   def test_with_polymorphic_urls
     @breadcrumbs.add "Resources", [:resources]
     html = @breadcrumbs.render(:format => :inline)
