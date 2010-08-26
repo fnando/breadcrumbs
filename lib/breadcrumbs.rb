@@ -4,9 +4,10 @@ require "breadcrumbs/action_controller_ext" if defined?(ActionController)
 require "active_support/inflector"
 
 class Breadcrumbs
-  attr_accessor :items
+  attr_accessor :controller, :items
 
-  def initialize # :nodoc:
+  def initialize(controller) # :nodoc:
+    self.controller = controller
     self.items = []
   end
 
@@ -22,6 +23,7 @@ class Breadcrumbs
   def add(text, url = nil, options = {})
     options.reverse_merge!(:i18n => true)
     text = translate(text) if options.delete(:i18n)
+    url  = controller.url_for(url) if url
     items << [text.to_s, url, options]
   end
 

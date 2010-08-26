@@ -1,8 +1,11 @@
 require "test_helper"
 
 class BreadcrumbsTest < Test::Unit::TestCase
+
   def setup
-    @breadcrumbs = Breadcrumbs.new
+    @controller = TestController.new
+    @controller.request = ActionController::TestRequest.new
+    @breadcrumbs = Breadcrumbs.new(@controller)
     @inline = Breadcrumbs::Render::Inline.new(@breadcrumbs)
   end
 
@@ -202,4 +205,11 @@ class BreadcrumbsTest < Test::Unit::TestCase
 
     assert_match /&lt;script&gt;alert\(1\)&lt;\/script&gt;/, html
   end
+
+  def test_with_polymorphic_urls
+    @breadcrumbs.add "Resources", [:resources]
+    html = @breadcrumbs.render(:format => :inline)
+    assert_equal %[<a class="first last item-0" href="/resources">Resources</a>], html
+  end
+
 end

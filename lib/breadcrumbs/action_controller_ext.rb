@@ -5,7 +5,7 @@ class Breadcrumbs
     end
 
     def breadcrumbs
-      @breadcrumbs ||= Breadcrumbs.new
+      @breadcrumbs ||= Breadcrumbs.new(self)
     end
   end
 end
