@@ -25,6 +25,8 @@ class Breadcrumbs
     items << [text.to_s, url, options]
   end
 
+  alias :<< :add
+
   # Render breadcrumbs using the specified format.
   # Use HTML lists by default, but can be plain links.
   #
@@ -36,7 +38,7 @@ class Breadcrumbs
   #   breadcrumbs.render(:id => "breadcrumbs")
   #   breadcrumbs.render(:class => "breadcrumbs")
   #
-  # You can define your own formatter. Just create a class that implements a +render+ instance
+  # You can also define your own formatter. Just create a class that implements a +render+ instance
   # method and you're good to go.
   #
   #   class Breadcrumbs::Render::Dl
@@ -54,10 +56,10 @@ class Breadcrumbs
 
     klass_name = options[:format].to_s.classify
     klass = Breadcrumbs::Render.const_get(klass_name)
-    klass.new(self, options).render
-  end
+    html = klass.new(self, options).render
 
-  alias :<< :add
+    html.respond_to?(:html_safe) ? html.html_safe : html
+  end
 
   def translate(scope) # :nodoc:
     text = I18n.t(scope, :scope => :breadcrumbs, :raise => true) rescue nil

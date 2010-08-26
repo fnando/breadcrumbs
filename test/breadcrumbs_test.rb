@@ -6,6 +6,13 @@ class BreadcrumbsTest < Test::Unit::TestCase
     @inline = Breadcrumbs::Render::Inline.new(@breadcrumbs)
   end
 
+  def test_return_safe_html
+    html_mock = mock
+    html_mock.expects(:html_safe).once
+    Breadcrumbs::Render::List.any_instance.stubs(:render).returns(html_mock)
+    @breadcrumbs.render(:format => :list)
+  end
+
   def test_add_item
     @breadcrumbs.add "Home"
     assert_equal 1, @breadcrumbs.items.count

@@ -52,6 +52,19 @@ You can set your own separator:
     You are here: <%= breadcrumbs.render(:format => :inline, :separator => '|') %>
   </p>
 
+You can also define your own formatter. Just create a class that implements a +render+ instance
+method and you're good to go.
+
+  class Breadcrumbs::Render::Dl
+    def render
+      # return breadcrumbs wrapped in a <DL> tag
+    end
+  end
+
+To use your new format, just provide the <tt>:format</tt> option.
+
+  breadcrumbs.render(:format => :dl)
+
 === I18n
 
 Breadcrumbs is integrated with I18n. You can set translations like:

@@ -1,8 +1,10 @@
 require "rubygems"
+gem "test-unit"
 require "test/unit"
 require "cgi"
 require "nokogiri"
 require "action_controller"
+require "mocha"
 
 require "breadcrumbs"
 
