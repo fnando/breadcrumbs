@@ -86,6 +86,7 @@ class BreadcrumbsTest < Test::Unit::TestCase
     assert_equal "last item-2", items[2]["class"]
     assert_equal "People", items[2].inner_text
     assert_nil items[2].at("a")
+    assert_not_nil items[2].at("span")
   end
 
   def test_render_inline
