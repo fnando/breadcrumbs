@@ -3,7 +3,7 @@ require "test_helper"
 class BreadcrumbsTest < Test::Unit::TestCase
 
   def setup
-    @controller = TestController.new
+    @controller = TestsController.new
     @controller.request = ActionController::TestRequest.new
     @breadcrumbs = Breadcrumbs.new(@controller)
     @inline = Breadcrumbs::Render::Inline.new(@breadcrumbs)
@@ -214,9 +214,11 @@ class BreadcrumbsTest < Test::Unit::TestCase
   end
 
   def test_with_polymorphic_urls
-    @breadcrumbs.add "Resources", [:resources]
-    html = @breadcrumbs.render(:format => :inline)
-    assert_equal %[<a class="first last item-0" href="/resources">Resources</a>], html
+    @breadcrumbs.add "Resources", [:tests]
+
+    html    = @breadcrumbs.render(:format => :inline)
+    prefix  = "#{@controller.request.scheme}://#{@controller.request.host}"
+    assert_equal %[<a class="first last item-0" href="#{prefix}/tests">Resources</a>], html
   end
 
 end

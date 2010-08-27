@@ -3,6 +3,8 @@ require "rake/testtask"
 require "rake/rdoctask"
 require "lib/breadcrumbs/version"
 
+task :default => :test
+
 Rake::TestTask.new do |t|
   t.libs << "test"
   t.libs << "lib"
