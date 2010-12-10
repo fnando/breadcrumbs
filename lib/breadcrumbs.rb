@@ -4,6 +4,24 @@ require "breadcrumbs/action_controller_ext" if defined?(ActionController)
 require "active_support/inflector"
 
 class Breadcrumbs
+  # Changing the translator allows changing the translation scheme
+  # If you set Breadcrumbs.translator to something that responds to 'call'
+  # it will delegate the translation to this object.
+  #
+  # Breadcrumbs.translator = lambda {|scope|
+  #   text = I18n.t(scope, :scope => :breadcrumbs, :raise => true) rescue nil
+  #   text ||= I18n.t(scope, :default => scope.to_s)
+  #   text
+  # }
+  cattr_accessor :translator
+  self.translator = lambda {|scope|
+    text = I18n.t(scope, :scope => :breadcrumbs, :raise => true) rescue nil
+    text ||= I18n.t(scope, :default => scope.to_s)
+    text
+  }
+
+
+
   attr_accessor :items
 
   def initialize # :nodoc:
@@ -62,8 +80,10 @@ class Breadcrumbs
   end
 
   def translate(scope) # :nodoc:
-    text = I18n.t(scope, :scope => :breadcrumbs, :raise => true) rescue nil
-    text ||= I18n.t(scope, :default => scope.to_s)
-    text
+    if self.translator.respond_to?(:call)
+      self.translator.call(scope)
+    else
+      scope.to_s
+    end
   end
 end

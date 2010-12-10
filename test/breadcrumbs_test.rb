@@ -1,6 +1,12 @@
 require "test_helper"
 
 class BreadcrumbsTest < Test::Unit::TestCase
+  class ReverseTranslator
+    def call(scope)
+      scope.to_s.reverse
+    end
+  end
+
   def setup
     @breadcrumbs = Breadcrumbs.new
     @inline = Breadcrumbs::Render::Inline.new(@breadcrumbs)
@@ -183,6 +189,43 @@ class BreadcrumbsTest < Test::Unit::TestCase
     assert_equal "contact", items[0].inner_text
     assert_equal "Help", items[1].inner_text
   end
+
+  def test_render_internationalized_text_using_custom_translator
+    original_translator = Breadcrumbs.translator
+    Breadcrumbs.translator = lambda {|scope|
+      scope.to_s.reverse
+    }
+
+    @breadcrumbs.add :home
+    @breadcrumbs.add :people
+
+    html = Nokogiri::HTML(@breadcrumbs.render)
+
+    items = html.search("li")
+
+    assert_equal "emoh", items[0].inner_text
+    assert_equal "elpoep", items[1].inner_text
+
+    Breadcrumbs.translator = original_translator
+  end
+
+  def test_render_internationalized_text_using_class_translator
+    original_translator = Breadcrumbs.translator
+    Breadcrumbs.translator = ReverseTranslator.new
+
+    @breadcrumbs.add :home
+    @breadcrumbs.add :people
+
+    html = Nokogiri::HTML(@breadcrumbs.render)
+
+    items = html.search("li")
+
+    assert_equal "emoh", items[0].inner_text
+    assert_equal "elpoep", items[1].inner_text
+
+    Breadcrumbs.translator = original_translator
+  end
+
 
   def test_pimp_action_controller
     methods = ActionController::Base.instance_methods
