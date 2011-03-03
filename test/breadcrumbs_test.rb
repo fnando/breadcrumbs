@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 require "test_helper"
 
 class BreadcrumbsTest < Test::Unit::TestCase
@@ -50,6 +51,7 @@ class BreadcrumbsTest < Test::Unit::TestCase
     html = Nokogiri::HTML(@breadcrumbs.render)
 
     assert_not_nil html.at("ul.breadcrumbs")
+    assert_nil html.at("ul.breadcrumbs[format=list]")
   end
 
   def test_render_as_ordered_list

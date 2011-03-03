@@ -54,7 +54,7 @@ class Breadcrumbs
   def render(options = {})
     options[:format] ||= :list
 
-    klass_name = options[:format].to_s.classify
+    klass_name = options.delete(:format).to_s.classify
     klass = Breadcrumbs::Render.const_get(klass_name)
     html = klass.new(self, options).render
 

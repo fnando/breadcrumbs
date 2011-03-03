@@ -1,0 +1,61 @@
+PATH
+  remote: .
+  specs:
+    breadcrumbs (0.1.5)
+      i18n
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    abstract (1.0.0)
+    actionpack (3.0.5)
+      activemodel (= 3.0.5)
+      activesupport (= 3.0.5)
+      builder (~> 2.1.2)
+      erubis (~> 2.6.6)
+      i18n (~> 0.4)
+      rack (~> 1.2.1)
+      rack-mount (~> 0.6.13)
+      rack-test (~> 0.5.7)
+      tzinfo (~> 0.3.23)
+    activemodel (3.0.5)
+      activesupport (= 3.0.5)
+      builder (~> 2.1.2)
+      i18n (~> 0.4)
+    activesupport (3.0.5)
+    archive-tar-minitar (0.5.2)
+    builder (2.1.2)
+    columnize (0.3.2)
+    erubis (2.6.6)
+      abstract (>= 1.0.0)
+    i18n (0.5.0)
+    linecache19 (0.5.11)
+      ruby_core_source (>= 0.1.4)
+    mocha (0.9.12)
+    nokogiri (1.4.4)
+    rack (1.2.1)
+    rack-mount (0.6.13)
+      rack (>= 1.0.0)
+    rack-test (0.5.7)
+      rack (>= 1.0)
+    ruby-debug-base19 (0.11.24)
+      columnize (>= 0.3.1)
+      linecache19 (>= 0.5.11)
+      ruby_core_source (>= 0.1.4)
+    ruby-debug19 (0.11.6)
+      columnize (>= 0.3.1)
+      linecache19 (>= 0.5.11)
+      ruby-debug-base19 (>= 0.11.19)
+    ruby_core_source (0.1.4)
+      archive-tar-minitar (>= 0.5.2)
+    tzinfo (0.3.24)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  actionpack
+  breadcrumbs!
+  mocha
+  nokogiri
+  ruby-debug19
