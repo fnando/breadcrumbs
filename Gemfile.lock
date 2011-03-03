@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    breadcrumbs (0.1.5)
+    breadcrumbs (0.1.6)
       i18n
 
 GEM
