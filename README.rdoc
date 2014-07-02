@@ -81,9 +81,30 @@ In fact, you can provide any scope you want.
 
   breadcrumbs.add "titles.home"
 
+
 If you don't want to translate a label, just pass the option <tt>:i18n</tt> as <tt>false</tt>.
 
   breadcrumbs.add :home, nil, :i18n => false
+
+
+You can also set a translator to completely overide the translator mechanism:
+
+ Breadcrumbs.translator = lambda {|scope|
+   text = I18n.t(scope, :scope => :breadcrumbs, :raise => true) rescue nil
+   text ||= I18n.t(scope, :default => scope.to_s)
+   text
+ }
+
+If you set the translator method to anything that responds to call then it will delegate translation
+to that object.
+
+class BreadcrumbTranslator
+  def call(scope)
+    scope.to_s.reverse
+  end
+end
+
+Breadcrumbs.translator = BreadcrumbTranslator.new
 
 == Maintainer
 
