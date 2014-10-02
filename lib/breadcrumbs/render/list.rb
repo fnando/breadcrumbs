@@ -2,12 +2,10 @@ class Breadcrumbs
   module Render
     class List < Base # :nodoc: all
       def render
-        options = {
-          :class => "breadcrumbs"
-        }.merge(default_options)
+        options = {class: "breadcrumbs"}.merge(default_options)
 
         tag(list_style, options) do
-          html = ""
+          html = ''
           items = breadcrumbs.items
           size = items.size
 
@@ -31,7 +29,7 @@ class Breadcrumbs
 
         text, url, options = *item
         text = wrap_item(url, CGI.escapeHTML(text), options)
-        tag(:li, text, :class => css.join(" "))
+        tag(:li, text, class: css.join(" "))
       end
     end
   end

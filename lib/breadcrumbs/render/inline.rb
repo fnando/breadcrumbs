@@ -2,7 +2,10 @@ class Breadcrumbs
   module Render
     class Inline < Base # :nodoc: all
       def render
-        options = {:class => "breadcrumbs", :separator => "&#187;"}.merge(default_options)
+        options = {
+          class: "breadcrumbs",
+          separator: "&#187;"
+        }.merge(default_options)
 
         html = []
         items = breadcrumbs.items
@@ -12,7 +15,7 @@ class Breadcrumbs
           html << render_item(item, i, size)
         end
 
-        separator = tag(:span, options[:separator], :class => "separator")
+        separator = tag(:span, options[:separator], class: "separator")
 
         html.join(" #{separator} ")
       end

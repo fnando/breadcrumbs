@@ -12,8 +12,8 @@ class Breadcrumbs
       # Build a HTML tag.
       #
       #   tag(:p, "Hello!")
-      #   tag(:p, "Hello!", :class => "hello")
-      #   tag(:p, :class => "phrase") { "Hello" }
+      #   tag(:p, "Hello!", class: "hello")
+      #   tag(:p, class: "phrase") { "Hello" }
       #
       def tag(name, *args, &block)
         options = args.pop if args.last.kind_of?(Hash)

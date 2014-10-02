@@ -8,10 +8,10 @@ class BreadcrumbsTest < Test::Unit::TestCase
   end
 
   def test_return_safe_html
-    html_mock = mock
+    html_mock = mock()
     html_mock.expects(:html_safe).once
     Breadcrumbs::Render::List.any_instance.stubs(:render).returns(html_mock)
-    @breadcrumbs.render(:format => :list)
+    @breadcrumbs.render(format: "list")
   end
 
   def test_add_item
@@ -28,7 +28,7 @@ class BreadcrumbsTest < Test::Unit::TestCase
 
   def test_tag_with_attributes
     expected = %[<span class="greetings" id="hi">Hi!</span>]
-    assert_equal expected, @inline.tag(:span, "Hi!", :class => "greetings", :id => "hi")
+    assert_equal expected, @inline.tag(:span, "Hi!", class: "greetings", id: "hi")
   end
 
   def test_tag_with_block
@@ -37,17 +37,17 @@ class BreadcrumbsTest < Test::Unit::TestCase
 
   def test_tag_with_block_and_attributes
     expected = %[<span class="greetings" id="hi">Hi!</span>]
-    assert_equal expected, @inline.tag(:span, :class => "greetings", :id => "hi") { "Hi!" }
+    assert_equal expected, @inline.tag(:span, class: "greetings", id: "hi") { "Hi!" }
   end
 
   def test_nested_tags
     expected = %[<span class="greetings"><strong id="hi">Hi!</strong></span>]
-    actual = @inline.tag(:span, :class => "greetings") { tag(:strong, "Hi!", :id => "hi") }
+    actual = @inline.tag(:span, class: "greetings") { tag(:strong, "Hi!", id: "hi") }
     assert_equal expected, actual
   end
 
   def test_render_as_list
-    @breadcrumbs.add "Home", "/", :class => "home"
+    @breadcrumbs.add "Home", "/", class: "home"
     html = Nokogiri::HTML(@breadcrumbs.render)
 
     assert_not_nil html.at("ul.breadcrumbs")
@@ -56,21 +56,21 @@ class BreadcrumbsTest < Test::Unit::TestCase
 
   def test_render_as_ordered_list
     @breadcrumbs.add "Home", "/"
-    html = Nokogiri::HTML(@breadcrumbs.render(:format => :ordered_list))
+    html = Nokogiri::HTML(@breadcrumbs.render(format: "ordered_list"))
 
     assert_not_nil html.at("ol.breadcrumbs")
   end
 
   def test_render_as_list_with_custom_attributes
-    @breadcrumbs.add "Home", "/", :class => "home"
-    html = Nokogiri::HTML(@breadcrumbs.render(:id => "breadcrumbs", :class => "top"))
+    @breadcrumbs.add "Home", "/", class: "home"
+    html = Nokogiri::HTML(@breadcrumbs.render(id: "breadcrumbs", class: "top"))
 
     assert_not_nil html.at("ul.top#breadcrumbs")
   end
 
   def test_render_as_list_add_items
-    @breadcrumbs.add "Home", "/", :class => "home"
-    @breadcrumbs.add "About", "/about", :class => "about"
+    @breadcrumbs.add "Home", "/", class: "home"
+    @breadcrumbs.add "About", "/about", class: "about"
     @breadcrumbs.add "People"
 
     html = Nokogiri::HTML(@breadcrumbs.render)
@@ -99,18 +99,18 @@ class BreadcrumbsTest < Test::Unit::TestCase
   end
 
   def test_render_inline
-    @breadcrumbs.add "Home", "/", :class => "home"
-    html = Nokogiri::HTML(@breadcrumbs.render(:format => :inline))
+    @breadcrumbs.add "Home", "/", class: "home"
+    html = Nokogiri::HTML(@breadcrumbs.render(format: "inline"))
 
     assert_nil html.at("ul.breadcrumbs")
   end
 
   def test_render_inline_add_items
-    @breadcrumbs.add "Home", "/", :class => "home"
-    @breadcrumbs.add "About", "/about", :class => "about"
+    @breadcrumbs.add "Home", "/", class: "home"
+    @breadcrumbs.add "About", "/about", class: "about"
     @breadcrumbs.add "People"
 
-    html = @breadcrumbs.render(:format => :inline)
+    html = @breadcrumbs.render(format: "inline")
     html = Nokogiri::HTML("<div>#{html}</div>")
     separator = Nokogiri::HTML("<span>&#187;</span>").at("span").inner_text
 
@@ -142,16 +142,16 @@ class BreadcrumbsTest < Test::Unit::TestCase
   end
 
   def test_render_inline_with_custom_separator
-    @breadcrumbs.add "Home", "/", :class => "home"
+    @breadcrumbs.add "Home", "/", class: "home"
     @breadcrumbs.add "People"
 
-    html = Nokogiri::HTML(@breadcrumbs.render(:format => :inline, :separator => "|"))
+    html = Nokogiri::HTML(@breadcrumbs.render(format: "inline", separator: "|"))
 
     assert_equal "|", html.at("span.separator").inner_text
   end
 
   def test_render_original_text_when_disabling_translation
-    @breadcrumbs.add :home, nil, :i18n => false
+    @breadcrumbs.add :home, nil, i18n: false
     @breadcrumbs.add :people
 
     html = Nokogiri::HTML(@breadcrumbs.render)
@@ -193,7 +193,7 @@ class BreadcrumbsTest < Test::Unit::TestCase
 
   def test_escape_text_when_rendering_inline
     @breadcrumbs.add "<script>alert(1)</script>"
-    html = @breadcrumbs.render(:format => :inline)
+    html = @breadcrumbs.render(format: "inline")
 
     assert_equal %[<span class="first last item-0">&lt;script&gt;alert(1)&lt;/script&gt;</span>], html
   end
