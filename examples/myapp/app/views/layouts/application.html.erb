@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Myapp</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= breadcrumbs.render(format: 'list') %>
+
+<%= yield %>
+
+</body>
+</html>

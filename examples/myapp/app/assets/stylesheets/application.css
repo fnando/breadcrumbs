@@ -1,0 +1,49 @@
+/*
+ *= require_tree .
+ *= require_self
+ */
+
+.breadcrumbs {
+  font-family: sans-serif;
+  font-size: 14px;
+  background: #f5f5f5;
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+  overflow: hidden;
+  color: #777;
+  border-radius: 5px;
+}
+
+.breadcrumbs li {
+  float: left;
+}
+
+.breadcrumbs li + li:before {
+  content: '/';
+  color: #ccc;
+  margin: 0 10px;
+}
+
+.breadcrumbs a {
+  color: #428bca;
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumbs .first {
+  position: relative;
+  padding-left: 18px;
+}
+
+.breadcrumbs .first:before {
+  content: '\2302';
+  font-size: 20px;
+  position: absolute;
+  left: 0;
+  top: -2px;
+  color: #ccc;
+}
