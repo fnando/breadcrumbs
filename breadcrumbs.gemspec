@@ -1,6 +1,4 @@
-# -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
-require "breadcrumbs/version"
+require "./lib/breadcrumbs/version"
 
 Gem::Specification.new do |s|
   s.name        = "breadcrumbs"
