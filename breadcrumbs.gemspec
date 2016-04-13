@@ -23,5 +23,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "actionpack"
   s.add_development_dependency "mocha"
   s.add_development_dependency "rake"
-  s.add_development_dependency "test-unit"
+  s.add_development_dependency "bundler"
+  s.add_development_dependency "minitest-utils"
 end

@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 require "test_helper"
 
-class BreadcrumbsTest < Test::Unit::TestCase
+class BreadcrumbsTest < Minitest::Test
   def setup
     @breadcrumbs = Breadcrumbs.new
     @inline = Breadcrumbs::Render::Inline.new(@breadcrumbs)
@@ -50,7 +50,7 @@ class BreadcrumbsTest < Test::Unit::TestCase
     @breadcrumbs.add "Home", "/", class: "home"
     html = Nokogiri::HTML(@breadcrumbs.render)
 
-    assert_not_nil html.at("ul.breadcrumbs")
+    refute_nil html.at("ul.breadcrumbs")
     assert_nil html.at("ul.breadcrumbs[format=list]")
   end
 
@@ -58,14 +58,14 @@ class BreadcrumbsTest < Test::Unit::TestCase
     @breadcrumbs.add "Home", "/"
     html = Nokogiri::HTML(@breadcrumbs.render(format: "ordered_list"))
 
-    assert_not_nil html.at("ol.breadcrumbs")
+    refute_nil html.at("ol.breadcrumbs")
   end
 
   def test_render_as_list_with_custom_attributes
     @breadcrumbs.add "Home", "/", class: "home"
     html = Nokogiri::HTML(@breadcrumbs.render(id: "breadcrumbs", class: "top"))
 
-    assert_not_nil html.at("ul.top#breadcrumbs")
+    refute_nil html.at("ul.top#breadcrumbs")
   end
 
   def test_render_as_list_add_items
@@ -95,7 +95,7 @@ class BreadcrumbsTest < Test::Unit::TestCase
     assert_equal "last item-2", items[2]["class"]
     assert_equal "People", items[2].inner_text
     assert_nil items[2].at("a")
-    assert_not_nil items[2].at("span")
+    refute_nil items[2].at("span")
   end
 
   def test_render_inline

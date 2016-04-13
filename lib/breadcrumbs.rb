@@ -31,10 +31,10 @@ class Breadcrumbs
   # Use HTML lists by default, but can be plain links.
   #
   #   breadcrumbs.render
-  #   breadcrumbs.render(format: 'inline')
-  #   breadcrumbs.render(format: 'inline', separator: '|')
-  #   breadcrumbs.render(format: 'list')
-  #   breadcrumbs.render(format: 'ordered_list')
+  #   breadcrumbs.render(format: "inline")
+  #   breadcrumbs.render(format: "inline", separator: "|")
+  #   breadcrumbs.render(format: "list")
+  #   breadcrumbs.render(format: "ordered_list")
   #   breadcrumbs.render(id: 'breadcrumbs')
   #   breadcrumbs.render(class: 'breadcrumbs')
   #
@@ -62,7 +62,7 @@ class Breadcrumbs
   end
 
   def translate(scope) # :nodoc:
-    text = I18n.t(scope, scope: 'breadcrumbs', raise: true) rescue nil
+    text = I18n.t(scope, scope: "breadcrumbs", raise: true) rescue nil
     text ||= I18n.t(scope, default: scope.to_s) rescue scope
     text
   end

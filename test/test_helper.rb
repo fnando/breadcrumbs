@@ -1,5 +1,6 @@
-require "bundler"
-require "test/unit"
+require "bundler/setup"
+require "minitest/utils"
+require "minitest/autorun"
 require "cgi"
 require "nokogiri"
 require "action_controller"
