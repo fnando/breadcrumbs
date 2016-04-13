@@ -1,5 +1,11 @@
 # Breadcrumbs
 
+[![Travis-CI](https://travis-ci.org/fnando/breadcrumbs.png)](https://travis-ci.org/fnando/breadcrumbs)
+[![Code Climate](https://codeclimate.com/github/fnando/breadcrumbs/badges/gpa.svg)](https://codeclimate.com/github/fnando/breadcrumbs)
+[![Test Coverage](https://codeclimate.com/github/fnando/breadcrumbs/badges/coverage.svg)](https://codeclimate.com/github/fnando/breadcrumbs/coverage)
+[![Gem](https://img.shields.io/gem/v/breadcrumbs.svg)](https://rubygems.org/gems/breadcrumbs)
+[![Gem](https://img.shields.io/gem/dt/breadcrumbs.svg)](https://rubygems.org/gems/breadcrumbs)
+
 Breadcrumbs is a simple plugin that adds a +breadcrumbs+ object to controllers and views.
 
 ## Instalation
