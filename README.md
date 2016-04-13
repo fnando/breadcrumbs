@@ -1,71 +1,89 @@
-= Breadcrumbs
+# Breadcrumbs
 
 Breadcrumbs is a simple plugin that adds a +breadcrumbs+ object to controllers and views.
 
-== Instalation
+## Instalation
 
-Just run <tt>sudo gem install breadcrumbs</tt>
+Just run `gem install breadcrumbs`. Or add `gem "breadcrumbs"` to your Gemfile.
 
-== Usage
+## Usage
 
 On your controller (optional):
 
-  class ApplicationController < ActionController::Base
-    before_filter :add_initial_breadcrumbs
+```ruby
+class ApplicationController < ActionController::Base
+  before_filter :add_initial_breadcrumbs
 
-    private
-    def add_initial_breadcrumbs
-      breadcrumbs.add 'Home', root_path
-    end
+  private
+  def add_initial_breadcrumbs
+    breadcrumbs.add "Home", root_path
   end
+end
 
-  class ThingsController < ApplicationController
-    def index
-      breadcrumbs.add 'Things', things_path
-    end
+class ThingsController < ApplicationController
+  def index
+    breadcrumbs.add "Things", things_path
   end
+end
+```
 
 You don't need to provide an URL; in that case, a span will be generated
 instead of a link:
 
-  breadcrumbs.add 'Some page'
+```ruby
+breadcrumbs.add "Some page"
+```
 
 You can set additional HTML attributes if you need to:
 
-  breadcrumbs.add 'Home', root_path, :id => 'home', :title => 'Go to the home page'
+```ruby
+breadcrumbs.add "Home", root_path, id: "home", title: "Go to the home page"
+```
 
 On your view (possibly application.html.erb):
 
-  <%= breadcrumbs.render %>
+```erb
+<%= breadcrumbs.render %>
+```
 
 You can render as ordered list.
 
-  <%= breadcrumbs.render(:format => :ordered_list) %>
+```erb
+<%= breadcrumbs.render(format: :ordered_list) %>
+```
 
 You can render as inline links.
 
-  <%= breadcrumbs.render(:format => :inline) %>
+```erb
+<%= breadcrumbs.render(format: :inline) %>
+```
 
 You can set your own separator:
 
-  <p>
-    You are here: <%= breadcrumbs.render(:format => :inline, :separator => '|') %>
-  </p>
+```erb
+<p>
+  You are here: <%= breadcrumbs.render(format: :inline, separator: "|") %>
+</p>
+```
 
 You can also define your own formatter. Just create a class that implements a +render+ instance
 method and you're good to go.
 
-  class Breadcrumbs::Render::Dl
-    def render
-      # return breadcrumbs wrapped in a <DL> tag
-    end
+```ruby
+class Breadcrumbs::Render::Dl
+  def render
+    # return breadcrumbs wrapped in a <dl> tag
   end
+end
+```
 
-To use your new format, just provide the <tt>:format</tt> option.
+To use your new format, just provide the `:format` option.
 
-  breadcrumbs.render(:format => :dl)
+```ruby
+breadcrumbs.render(format: :dl)
+```
 
-=== I18n
+### I18n
 
 Breadcrumbs is integrated with I18n. You can set translations like:
 
@@ -75,21 +93,27 @@ Breadcrumbs is integrated with I18n. You can set translations like:
 
 And then you just call
 
-  breadcrumbs.add :home
+```ruby
+breadcrumbs.add :home
+```
 
 In fact, you can provide any scope you want.
 
-  breadcrumbs.add "titles.home"
+```ruby
+breadcrumbs.add :"titles.home"
+```
 
-If you don't want to translate a label, just pass the option <tt>:i18n</tt> as <tt>false</tt>.
+If you don't want to translate a label, just pass the option `:i18n` as `false`.
 
-  breadcrumbs.add :home, nil, :i18n => false
+```ruby
+breadcrumbs.add :home, nil, i18n: false
+```
 
-== Maintainer
+## Maintainer
 
-* Nando Vieira - http://simplesideias.com.br
+* Nando Vieira - http://nandovieira.com
 
-License
+## License
 
 (The MIT License)
 
