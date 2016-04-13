@@ -6,7 +6,7 @@
 [![Gem](https://img.shields.io/gem/v/breadcrumbs.svg)](https://rubygems.org/gems/breadcrumbs)
 [![Gem](https://img.shields.io/gem/dt/breadcrumbs.svg)](https://rubygems.org/gems/breadcrumbs)
 
-Breadcrumbs is a simple plugin that adds a +breadcrumbs+ object to controllers and views.
+Breadcrumbs is a simple plugin that adds a `breadcrumbs` object to controllers and views.
 
 ## Instalation
 
@@ -72,7 +72,7 @@ You can set your own separator:
 </p>
 ```
 
-You can also define your own formatter. Just create a class that implements a +render+ instance
+You can also define your own formatter. Just create a class that implements a `render` instance
 method and you're good to go.
 
 ```ruby
@@ -93,9 +93,11 @@ breadcrumbs.render(format: :dl)
 
 Breadcrumbs is integrated with I18n. You can set translations like:
 
-  en:
-    breadcrumbs:
-      home: "Home"
+```yaml
+en:
+  breadcrumbs:
+    home: "Home"
+```
 
 And then you just call
 
