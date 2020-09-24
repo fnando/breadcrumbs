@@ -1,4 +1,5 @@
-# -*- encoding: utf-8 -*-
+# frozen_string_literal: true
+
 require "test_helper"
 
 class BreadcrumbsTest < Minitest::Test
@@ -8,10 +9,7 @@ class BreadcrumbsTest < Minitest::Test
   end
 
   def test_return_safe_html
-    html_mock = mock()
-    html_mock.expects(:html_safe).once
-    Breadcrumbs::Render::List.any_instance.stubs(:render).returns(html_mock)
-    @breadcrumbs.render(format: "list")
+    assert @breadcrumbs.render(format: "list").html_safe?
   end
 
   def test_add_item
@@ -22,13 +20,10 @@ class BreadcrumbsTest < Minitest::Test
     assert_equal 2, @breadcrumbs.items.count
   end
 
-  def test_tag
-    assert_equal "<span>Hi!</span>", @inline.tag(:span, "Hi!")
-  end
-
   def test_tag_with_attributes
     expected = %[<span class="greetings" id="hi">Hi!</span>]
-    assert_equal expected, @inline.tag(:span, "Hi!", class: "greetings", id: "hi")
+    assert_equal expected,
+                 @inline.tag(:span, "Hi!", class: "greetings", id: "hi")
   end
 
   def test_tag_with_block
@@ -37,12 +32,16 @@ class BreadcrumbsTest < Minitest::Test
 
   def test_tag_with_block_and_attributes
     expected = %[<span class="greetings" id="hi">Hi!</span>]
-    assert_equal expected, @inline.tag(:span, class: "greetings", id: "hi") { "Hi!" }
+    assert_equal expected,
+                 @inline.tag(:span, class: "greetings", id: "hi") { "Hi!" }
   end
 
   def test_nested_tags
     expected = %[<span class="greetings"><strong id="hi">Hi!</strong></span>]
-    actual = @inline.tag(:span, class: "greetings") { tag(:strong, "Hi!", id: "hi") }
+    actual = @inline.tag(:span, class: "greetings") do
+      @inline.tag(:strong, "Hi!", id: "hi")
+    end
+
     assert_equal expected, actual
   end
 
@@ -112,7 +111,7 @@ class BreadcrumbsTest < Minitest::Test
 
     html = @breadcrumbs.render(format: "inline")
     html = Nokogiri::HTML("<div>#{html}</div>")
-    separator = Nokogiri::HTML("<span>&#187;</span>").at("span").inner_text
+    separator = "&#187;"
 
     items = html.search("div *")
 
@@ -179,7 +178,6 @@ class BreadcrumbsTest < Minitest::Test
     @breadcrumbs.add "Help"
 
     html = Nokogiri::HTML(@breadcrumbs.render)
-
     items = html.search("li")
 
     assert_equal "contact", items[0].inner_text
@@ -188,20 +186,20 @@ class BreadcrumbsTest < Minitest::Test
 
   def test_pimp_action_controller
     methods = ActionController::Base.instance_methods
-    assert (methods.include?(:breadcrumbs) || methods.include?("breadcrumbs"))
+    assert(methods.include?(:breadcrumbs) || methods.include?("breadcrumbs"))
   end
 
   def test_escape_text_when_rendering_inline
     @breadcrumbs.add "<script>alert(1)</script>"
-    html = @breadcrumbs.render(format: "inline")
+    html = Nokogiri::HTML(@breadcrumbs.render(format: "inline"))
 
-    assert_equal %[<span class="first last item-0">&lt;script&gt;alert(1)&lt;/script&gt;</span>], html
+    assert_empty html.search("script")
   end
 
   def test_escape_text_when_rendering_list
     @breadcrumbs.add "<script>alert(1)</script>"
-    html = @breadcrumbs.render
+    html = Nokogiri::HTML(@breadcrumbs.render)
 
-    assert_match /&lt;script&gt;alert\(1\)&lt;\/script&gt;/, html
+    assert_empty html.search("script")
   end
 end

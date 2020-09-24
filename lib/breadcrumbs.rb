@@ -1,7 +1,11 @@
+# frozen_string_literal: true
+
 require "i18n"
+require "action_view"
+require "active_support/inflector"
+
 require "breadcrumbs/render"
 require "breadcrumbs/action_controller_ext" if defined?(ActionController)
-require "active_support/inflector"
 
 class Breadcrumbs
   attr_accessor :items
@@ -25,7 +29,7 @@ class Breadcrumbs
     items << [text.to_s, url, options]
   end
 
-  alias :<< :add
+  alias << add
 
   # Render breadcrumbs using the specified format.
   # Use HTML lists by default, but can be plain links.
@@ -38,7 +42,8 @@ class Breadcrumbs
   #   breadcrumbs.render(id: 'breadcrumbs')
   #   breadcrumbs.render(class: 'breadcrumbs')
   #
-  # You can also define your own formatter. Just create a class that implements a +render+ instance
+  # You can also define your own formatter. Just create a class that implements
+  # a +render+ instance
   # method and you're good to go.
   #
   #   class Breadcrumbs::Render::Dl
@@ -56,14 +61,22 @@ class Breadcrumbs
 
     klass_name = options.delete(:format).to_s.classify
     klass = Breadcrumbs::Render.const_get(klass_name)
-    html = klass.new(self, options).render
-
-    html.respond_to?(:html_safe) ? html.html_safe : html
+    klass.new(self, options).render
   end
 
   def translate(scope) # :nodoc:
-    text = I18n.t(scope, scope: "breadcrumbs", raise: true) rescue nil
-    text ||= I18n.t(scope, default: scope.to_s) rescue scope
+    text = begin
+      I18n.t(scope, scope: "breadcrumbs", raise: true)
+    rescue StandardError
+      nil
+    end
+
+    text ||= begin
+      I18n.t(scope, default: scope.to_s)
+    rescue StandardError
+      scope
+    end
+
     text
   end
 end

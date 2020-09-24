@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Breadcrumbs
   module Render
     require "breadcrumbs/render/base"

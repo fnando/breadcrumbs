@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Breadcrumbs
   module Render
     class List < Base # :nodoc: all
@@ -5,7 +7,7 @@ class Breadcrumbs
         options = {class: "breadcrumbs"}.merge(default_options)
 
         tag(list_style, options) do
-          html = ''
+          html = []
           items = breadcrumbs.items
           size = items.size
 
@@ -13,7 +15,7 @@ class Breadcrumbs
             html << render_item(item, i, size)
           end
 
-          html
+          html.join.html_safe
         end
       end
 
@@ -23,12 +25,12 @@ class Breadcrumbs
 
       def render_item(item, i, size)
         css = []
-        css << "first" if i == 0
+        css << "first" if i.zero?
         css << "last" if i == size - 1
         css << "item-#{i}"
 
         text, url, options = *item
-        text = wrap_item(url, CGI.escapeHTML(text), options)
+        text = wrap_item(url, text, options)
         tag(:li, text, class: css.join(" "))
       end
     end

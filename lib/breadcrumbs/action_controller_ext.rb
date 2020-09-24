@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Breadcrumbs
   module ActionController # :nodoc: all
     def self.included(base)
@@ -10,4 +12,4 @@ class Breadcrumbs
   end
 end
 
-ActionController::Base.send :include, Breadcrumbs::ActionController
+ActionController::Base.include Breadcrumbs::ActionController

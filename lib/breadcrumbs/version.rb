@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Breadcrumbs
   module Version # :nodoc: all
     MAJOR = 0

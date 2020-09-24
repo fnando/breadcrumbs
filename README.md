@@ -1,12 +1,12 @@
 # Breadcrumbs
 
-[![Travis-CI](https://travis-ci.org/fnando/breadcrumbs.png)](https://travis-ci.org/fnando/breadcrumbs)
+[![Travis-CI](https://travis-ci.org/fnando/breadcrumbs.svg)](https://travis-ci.org/fnando/breadcrumbs)
 [![Code Climate](https://codeclimate.com/github/fnando/breadcrumbs/badges/gpa.svg)](https://codeclimate.com/github/fnando/breadcrumbs)
-[![Test Coverage](https://codeclimate.com/github/fnando/breadcrumbs/badges/coverage.svg)](https://codeclimate.com/github/fnando/breadcrumbs/coverage)
 [![Gem](https://img.shields.io/gem/v/breadcrumbs.svg)](https://rubygems.org/gems/breadcrumbs)
 [![Gem](https://img.shields.io/gem/dt/breadcrumbs.svg)](https://rubygems.org/gems/breadcrumbs)
 
-Breadcrumbs is a simple plugin that adds a `breadcrumbs` object to controllers and views.
+Breadcrumbs is a simple plugin that adds a `breadcrumbs` object to controllers
+and views.
 
 ## Instalation
 
@@ -33,8 +33,8 @@ class ThingsController < ApplicationController
 end
 ```
 
-You don't need to provide an URL; in that case, a span will be generated
-instead of a link:
+You don't need to provide an URL; in that case, a span will be generated instead
+of a link:
 
 ```ruby
 breadcrumbs.add "Some page"
@@ -72,8 +72,8 @@ You can set your own separator:
 </p>
 ```
 
-You can also define your own formatter. Just create a class that implements a `render` instance
-method and you're good to go.
+You can also define your own formatter. Just create a class that implements a
+`render` instance method and you're good to go.
 
 ```ruby
 class Breadcrumbs::Render::Dl
@@ -119,27 +119,25 @@ breadcrumbs.add :home, nil, i18n: false
 
 ## Maintainer
 
-* Nando Vieira - http://nandovieira.com
+- Nando Vieira - http://nandovieira.com
 
 ## License
 
 (The MIT License)
 
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-'Software'), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the 'Software'), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
 
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

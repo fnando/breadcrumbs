@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Breadcrumbs
   module Render
     class Inline < Base # :nodoc: all
@@ -17,22 +19,21 @@ class Breadcrumbs
 
         separator = tag(:span, options[:separator], class: "separator")
 
-        html.join(" #{separator} ")
+        html.join(" #{separator} ").html_safe
       end
 
       def render_item(item, i, size)
         text, url, options = *item
-        options[:class] ||= ""
 
-        css = []
-        css << "first" if i == 0
+        css = [options[:class]].compact
+        css << "first" if i.zero?
         css << "last" if i == size - 1
         css << "item-#{i}"
 
-        options[:class] << " #{css.join(" ")}"
+        options[:class] = css.join(" ")
         options[:class].gsub!(/^ *(.*?)$/, '\\1')
 
-        wrap_item(url, CGI.escapeHTML(text), options)
+        wrap_item(url, text, options)
       end
     end
   end
