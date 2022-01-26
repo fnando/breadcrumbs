@@ -8,15 +8,4 @@ AllCops:
   Exclude:
     - examples/**/*
     - vendor/**/*
-
-Metrics/MethodLength:
-  Enabled: false
-
-Metrics/AbcSize:
-  Enabled: false
-
-Metrics/MethodLength:
-  Enabled: false
-
-Metrics/ClassLength:
-  Enabled: false
+    - gemfiles/**/*

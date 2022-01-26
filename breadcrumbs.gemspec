@@ -12,7 +12,18 @@ Gem::Specification.new do |s|
   s.summary     = "Breadcrumbs is a simple plugin that adds a `breadcrumbs` " \
                   "object to controllers and views."
   s.description = s.summary
-  s.required_ruby_version = Gem::Requirement.new(">= 2.5.0")
+  s.required_ruby_version = Gem::Requirement.new(">= 2.7.0")
+
+  github_url = "https://github.com/fnando/breadcrumbs"
+  github_tree_url = "#{github_url}/tree/v#{s.version}"
+
+  s.metadata["homepage_uri"] = s.homepage
+  s.metadata["bug_tracker_uri"] = "#{github_url}/issues"
+  s.metadata["source_code_uri"] = github_tree_url
+  s.metadata["changelog_uri"] = "#{github_tree_url}/CHANGELOG.md"
+  s.metadata["documentation_uri"] = "#{github_tree_url}/README.md"
+  s.metadata["license_uri"] = "#{github_tree_url}/LICENSE.md"
+  s.metadata["rubygems_mfa_required"] = "true"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
