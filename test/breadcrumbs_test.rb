@@ -8,11 +8,11 @@ class BreadcrumbsTest < Minitest::Test
     @inline = Breadcrumbs::Render::Inline.new(@breadcrumbs)
   end
 
-  def test_return_safe_html
+  test "returns safe html" do
     assert @breadcrumbs.render(format: "list").html_safe?
   end
 
-  def test_add_item
+  test "adds item" do
     @breadcrumbs.add "Home"
     assert_equal 1, @breadcrumbs.items.count
 
@@ -20,23 +20,23 @@ class BreadcrumbsTest < Minitest::Test
     assert_equal 2, @breadcrumbs.items.count
   end
 
-  def test_tag_with_attributes
+  test "renders tag with attributes" do
     expected = %[<span class="greetings" id="hi">Hi!</span>]
     assert_equal expected,
                  @inline.tag(:span, "Hi!", class: "greetings", id: "hi")
   end
 
-  def test_tag_with_block
+  test "renders tag with block" do
     assert_equal "<span>Hi!</span>", @inline.tag(:span) { "Hi!" }
   end
 
-  def test_tag_with_block_and_attributes
+  test "renders tag with block and attributes" do
     expected = %[<span class="greetings" id="hi">Hi!</span>]
     assert_equal expected,
                  @inline.tag(:span, class: "greetings", id: "hi") { "Hi!" }
   end
 
-  def test_nested_tags
+  test "renders nested tags" do
     expected = %[<span class="greetings"><strong id="hi">Hi!</strong></span>]
     actual = @inline.tag(:span, class: "greetings") do
       @inline.tag(:strong, "Hi!", id: "hi")
@@ -45,7 +45,7 @@ class BreadcrumbsTest < Minitest::Test
     assert_equal expected, actual
   end
 
-  def test_render_as_list
+  test "renders as list" do
     @breadcrumbs.add "Home", "/", class: "home"
     html = Nokogiri::HTML(@breadcrumbs.render)
 
@@ -53,21 +53,21 @@ class BreadcrumbsTest < Minitest::Test
     assert_nil html.at("ul.breadcrumbs[format=list]")
   end
 
-  def test_render_as_ordered_list
+  test "renders as ordered list" do
     @breadcrumbs.add "Home", "/"
     html = Nokogiri::HTML(@breadcrumbs.render(format: "ordered_list"))
 
     refute_nil html.at("ol.breadcrumbs")
   end
 
-  def test_render_as_list_with_custom_attributes
+  test "renders as list with custom attributes" do
     @breadcrumbs.add "Home", "/", class: "home"
     html = Nokogiri::HTML(@breadcrumbs.render(id: "breadcrumbs", class: "top"))
 
     refute_nil html.at("ul.top#breadcrumbs")
   end
 
-  def test_render_as_list_add_items
+  test "renders as list add items" do
     @breadcrumbs.add "Home", "/", class: "home"
     @breadcrumbs.add "About", "/about", class: "about"
     @breadcrumbs.add "People"
@@ -97,14 +97,14 @@ class BreadcrumbsTest < Minitest::Test
     refute_nil items[2].at("span")
   end
 
-  def test_render_inline
+  test "renders inline" do
     @breadcrumbs.add "Home", "/", class: "home"
     html = Nokogiri::HTML(@breadcrumbs.render(format: "inline"))
 
     assert_nil html.at("ul.breadcrumbs")
   end
 
-  def test_render_inline_add_items
+  test "renders inline add items" do
     @breadcrumbs.add "Home", "/", class: "home"
     @breadcrumbs.add "About", "/about", class: "about"
     @breadcrumbs.add "People"
@@ -140,7 +140,7 @@ class BreadcrumbsTest < Minitest::Test
     assert_equal "People", items[4].inner_text
   end
 
-  def test_render_inline_with_custom_separator
+  test "renders inline with custom separator" do
     @breadcrumbs.add "Home", "/", class: "home"
     @breadcrumbs.add "People"
 
@@ -149,7 +149,7 @@ class BreadcrumbsTest < Minitest::Test
     assert_equal "|", html.at("span.separator").inner_text
   end
 
-  def test_render_original_text_when_disabling_translation
+  test "renders original text when disabling_translation" do
     @breadcrumbs.add :home, nil, i18n: false
     @breadcrumbs.add :people
 
@@ -161,7 +161,7 @@ class BreadcrumbsTest < Minitest::Test
     assert_equal "Nosso time", items[1].inner_text
   end
 
-  def test_render_internationalized_text_using_default_scope
+  test "renders internationalized text using default scope" do
     @breadcrumbs.add :home
     @breadcrumbs.add :people
 
@@ -173,7 +173,7 @@ class BreadcrumbsTest < Minitest::Test
     assert_equal "Nosso time", items[1].inner_text
   end
 
-  def test_render_scope_as_text_for_missing_scope
+  test "renders scope as text for missing scope" do
     @breadcrumbs.add :contact
     @breadcrumbs.add "Help"
 
@@ -184,19 +184,19 @@ class BreadcrumbsTest < Minitest::Test
     assert_equal "Help", items[1].inner_text
   end
 
-  def test_pimp_action_controller
+  test "extends action controller" do
     methods = ActionController::Base.instance_methods
     assert(methods.include?(:breadcrumbs) || methods.include?("breadcrumbs"))
   end
 
-  def test_escape_text_when_rendering_inline
+  test "escapes text when rendering inline" do
     @breadcrumbs.add "<script>alert(1)</script>"
     html = Nokogiri::HTML(@breadcrumbs.render(format: "inline"))
 
     assert_empty html.search("script")
   end
 
-  def test_escape_text_when_rendering_list
+  test "escapes text when rendering list" do
     @breadcrumbs.add "<script>alert(1)</script>"
     html = Nokogiri::HTML(@breadcrumbs.render)
 
