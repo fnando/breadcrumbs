@@ -65,6 +65,8 @@ class Breadcrumbs
   end
 
   def translate(scope) # :nodoc:
+    return scope if scope.match?(/\A[\s.]+\z/)
+
     text = begin
       I18n.t(scope, scope: "breadcrumbs", raise: true)
     rescue StandardError

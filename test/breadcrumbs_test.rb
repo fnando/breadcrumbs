@@ -202,4 +202,19 @@ class BreadcrumbsTest < Minitest::Test
 
     assert_empty html.search("script")
   end
+
+  test "renders dots as breadcrumb items" do
+    @breadcrumbs.add "."
+    @breadcrumbs.add ".."
+    @breadcrumbs.add "..."
+    @breadcrumbs.add ". . ."
+    html = Nokogiri::HTML(@breadcrumbs.render)
+
+    items = html.search("li")
+
+    assert_equal ".", items[0].inner_text
+    assert_equal "..", items[1].inner_text
+    assert_equal "...", items[2].inner_text
+    assert_equal ". . .", items[3].inner_text
+  end
 end
