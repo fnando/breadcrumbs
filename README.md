@@ -17,7 +17,7 @@ On your controller (optional):
 
 ```ruby
 class ApplicationController < ActionController::Base
-  before_filter :add_initial_breadcrumbs
+  before_action :add_initial_breadcrumbs
 
   private
   def add_initial_breadcrumbs
