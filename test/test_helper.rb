@@ -9,7 +9,6 @@ require "minitest/autorun"
 require "cgi"
 require "nokogiri"
 require "action_controller"
-require "mocha/test_unit"
 
 require "breadcrumbs"
 

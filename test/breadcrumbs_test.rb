@@ -14,14 +14,17 @@ class BreadcrumbsTest < Minitest::Test
 
   test "adds item" do
     @breadcrumbs.add "Home"
+
     assert_equal 1, @breadcrumbs.items.count
 
     @breadcrumbs << "Home"
+
     assert_equal 2, @breadcrumbs.items.count
   end
 
   test "renders tag with attributes" do
     expected = %[<span class="greetings" id="hi">Hi!</span>]
+
     assert_equal expected,
                  @inline.tag(:span, "Hi!", class: "greetings", id: "hi")
   end
@@ -32,6 +35,7 @@ class BreadcrumbsTest < Minitest::Test
 
   test "renders tag with block and attributes" do
     expected = %[<span class="greetings" id="hi">Hi!</span>]
+
     assert_equal expected,
                  @inline.tag(:span, class: "greetings", id: "hi") { "Hi!" }
   end
@@ -81,6 +85,7 @@ class BreadcrumbsTest < Minitest::Test
     assert_equal "Home", items[0].inner_text
 
     link = items[0].at("a")
+
     assert_equal "home", link["class"]
     assert_equal "/", link["href"]
 
@@ -88,6 +93,7 @@ class BreadcrumbsTest < Minitest::Test
     assert_equal "About", items[1].inner_text
 
     link = items[1].at("a")
+
     assert_equal "about", link["class"]
     assert_equal "/about", link["href"]
 
@@ -186,6 +192,7 @@ class BreadcrumbsTest < Minitest::Test
 
   test "extends action controller" do
     methods = ActionController::Base.instance_methods
+
     assert(methods.include?(:breadcrumbs) || methods.include?("breadcrumbs"))
   end
 
